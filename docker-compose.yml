@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: datacopilot
+      POSTGRES_USER: datacopilot
+      POSTGRES_PASSWORD: datacopilot
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sample-data/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U datacopilot"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_MODEL=${OPENROUTER_MODEL:-openai/gpt-4o-mini}
+      - DATABASE_URL=postgresql+asyncpg://datacopilot:datacopilot@db:5432/datacopilot
+      - DB_READ_ONLY=true
+      - ALLOWED_FILE_PATHS=["/app/sample-data"]
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./sample-data:/app/sample-data:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
