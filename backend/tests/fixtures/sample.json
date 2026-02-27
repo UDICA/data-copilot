@@ -1,0 +1,7 @@
+{
+  "company": "Acme Corp",
+  "departments": [
+    {"name": "Sales", "headcount": 50},
+    {"name": "Engineering", "headcount": 120}
+  ]
+}
