@@ -26,7 +26,7 @@ cp .env.example .env
 # Edit .env and add your OPENROUTER_API_KEY
 
 # Start everything
-docker-compose up --build
+docker compose up --build
 
 # Open http://localhost:3000
 ```

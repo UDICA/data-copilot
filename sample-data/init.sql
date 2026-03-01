@@ -161,7 +161,7 @@ SELECT
     || ' ' ||
     (ARRAY[
         'Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis',
-        'Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson',
+        'Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson','Phillips',
         'Thomas','Taylor','Moore','Jackson','Martin','Lee','Perez','Thompson',
         'White','Harris','Sanchez','Clark','Ramirez','Lewis','Robinson','Walker',
         'Young','Allen','King','Wright','Scott','Torres','Nguyen','Hill',
@@ -185,7 +185,7 @@ SELECT
     || LOWER(
         (ARRAY[
             'Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis',
-            'Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson',
+            'Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson','Phillips',
             'Thomas','Taylor','Moore','Jackson','Martin','Lee','Perez','Thompson',
             'White','Harris','Sanchez','Clark','Ramirez','Lewis','Robinson','Walker',
             'Young','Allen','King','Wright','Scott','Torres','Nguyen','Hill',
