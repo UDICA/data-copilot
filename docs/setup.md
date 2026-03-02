@@ -68,7 +68,7 @@ Tests use SQLite and mocked external services — no PostgreSQL or API keys requ
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `OPENROUTER_API_KEY` | (required) | Your OpenRouter API key |
-| `OPENROUTER_MODEL` | `openai/gpt-4o-mini` | LLM model identifier |
+| `OPENROUTER_MODEL` | `anthropic/claude-haiku-4.5` | LLM model identifier |
 | `DATABASE_URL` | `postgresql+asyncpg://...` | Database connection string |
 | `DB_READ_ONLY` | `true` | Enforce read-only database access |
 | `ALLOWED_FILE_PATHS` | `["/app/sample-data"]` | JSON array of allowed file directories |

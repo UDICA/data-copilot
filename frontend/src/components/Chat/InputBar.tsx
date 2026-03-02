@@ -45,7 +45,7 @@ export function InputBar({ onSend, disabled }: InputBarProps) {
   }, []);
 
   return (
-    <div className="border-t border-gray-200 bg-white p-4 shrink-0">
+    <div className="border-t border-gray-800 bg-gray-900 p-4 shrink-0">
       <div className="flex items-end gap-3 max-w-4xl mx-auto">
         <textarea
           ref={textareaRef}
@@ -56,14 +56,14 @@ export function InputBar({ onSend, disabled }: InputBarProps) {
           disabled={disabled}
           placeholder={disabled ? 'Waiting for response...' : 'Ask a question about your data...'}
           rows={1}
-          className="flex-1 resize-none rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none disabled:bg-gray-50 disabled:text-gray-400"
+          className="flex-1 resize-none rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-sm text-gray-100 placeholder-gray-500 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:outline-none disabled:bg-gray-800 disabled:text-gray-600"
           aria-label="Message input"
         />
         <button
           type="button"
           onClick={handleSend}
           disabled={disabled || !value.trim()}
-          className="shrink-0 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="shrink-0 rounded-lg bg-orange-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none disabled:bg-gray-700 disabled:cursor-not-allowed transition-colors"
           aria-label="Send message"
         >
           <svg
@@ -83,7 +83,7 @@ export function InputBar({ onSend, disabled }: InputBarProps) {
           </svg>
         </button>
       </div>
-      <p className="text-xs text-gray-400 mt-2 text-center">
+      <p className="text-xs text-gray-500 mt-2 text-center">
         Press Enter to send, Shift+Enter for a new line
       </p>
     </div>

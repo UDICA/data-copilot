@@ -72,3 +72,6 @@ logs/
 # Plans (local only)
 docs/plans/
 PLAN.md
+
+# Claude Code
+.claude/

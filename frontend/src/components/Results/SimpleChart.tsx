@@ -17,8 +17,8 @@ interface SimpleChartProps {
   title?: string;
 }
 
-/** Color palette for multiple numeric columns. */
-const BAR_COLORS = ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4'];
+/** Color palette using orange and purple tones. */
+const BAR_COLORS = ['#f97316', '#a855f7', '#fb923c', '#c084fc', '#ea580c', '#9333ea'];
 
 /**
  * Simple bar chart that auto-detects column types.
@@ -56,7 +56,7 @@ export function SimpleChart({ data, title }: SimpleChartProps) {
 
   if (data.length === 0 || numericKeys.length === 0) {
     return (
-      <p className="text-sm text-gray-500 italic">
+      <p className="text-sm text-gray-400 italic">
         No numeric data available for charting.
       </p>
     );
@@ -73,30 +73,31 @@ export function SimpleChart({ data, title }: SimpleChartProps) {
   });
 
   return (
-    <div className="border border-gray-200 rounded-lg p-4 bg-white">
+    <div className="border border-gray-700 rounded-lg p-4 bg-gray-900">
       {title && (
-        <h3 className="text-sm font-medium text-gray-700 mb-3">{title}</h3>
+        <h3 className="text-sm font-medium text-gray-300 mb-3">{title}</h3>
       )}
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
           <XAxis
             dataKey={xKey}
-            tick={{ fontSize: 12, fill: '#6b7280' }}
+            tick={{ fontSize: 12, fill: '#9ca3af' }}
             tickLine={false}
-            axisLine={{ stroke: '#d1d5db' }}
+            axisLine={{ stroke: '#4b5563' }}
           />
           <YAxis
-            tick={{ fontSize: 12, fill: '#6b7280' }}
+            tick={{ fontSize: 12, fill: '#9ca3af' }}
             tickLine={false}
-            axisLine={{ stroke: '#d1d5db' }}
+            axisLine={{ stroke: '#4b5563' }}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#fff',
-              border: '1px solid #e5e7eb',
+              backgroundColor: '#1f2937',
+              border: '1px solid #374151',
               borderRadius: '0.5rem',
               fontSize: '0.875rem',
+              color: '#d1d5db',
             }}
           />
           {numericKeys.length > 1 && <Legend />}

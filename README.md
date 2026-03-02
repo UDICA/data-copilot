@@ -114,7 +114,7 @@ Key settings:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `OPENROUTER_API_KEY` | (required) | API key for LLM access |
-| `OPENROUTER_MODEL` | `openai/gpt-4o-mini` | Which model to use |
+| `OPENROUTER_MODEL` | `anthropic/claude-haiku-4.5` | Which model to use |
 | `DATABASE_URL` | — | Database connection string |
 | `DB_READ_ONLY` | `true` | Enforce read-only queries |
 | `ALLOWED_FILE_PATHS` | `["/app/sample-data"]` | Accessible file directories |

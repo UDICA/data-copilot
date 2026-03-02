@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     # OpenRouter LLM
     openrouter_api_key: str = Field(description="OpenRouter API key for LLM access")
     openrouter_model: str = Field(
-        default="openai/gpt-4o-mini",
+        default="anthropic/claude-haiku-4.5",
         description="Model identifier on OpenRouter",
     )
     openrouter_base_url: str = Field(

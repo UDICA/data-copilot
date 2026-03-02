@@ -16,7 +16,7 @@ function App() {
   const { sources, loading: sourcesLoading, refresh: refreshSources } = useDataSources();
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex flex-col h-screen bg-gray-950">
       <Header />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar

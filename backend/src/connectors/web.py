@@ -58,6 +58,10 @@ class WebConnector:
             async with AsyncDDGS() as ddgs:
                 raw_results = await ddgs.atext(query, max_results=max_results)
 
+            if not raw_results:
+                logger.warning("Web search returned no results for: %s", query)
+                return []
+
             return [
                 {
                     "title": r.get("title", ""),
@@ -67,7 +71,7 @@ class WebConnector:
                 for r in raw_results
             ]
         except Exception as e:
-            logger.error("Web search failed: %s", e)
+            logger.error("Web search failed for '%s': %s: %s", query, type(e).__name__, e)
             return []
 
     async def fetch_url(

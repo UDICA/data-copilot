@@ -92,12 +92,16 @@ export function useChat() {
             break;
 
           case 'tool_start':
-            if (event.tool_name) {
-              accumulatedContent += `\n\n> Using tool: **${event.tool_name}**...\n`;
+            // Track tool usage via source badges only — no inline text
+            if (event.tool_name && !accumulatedSources.some(s => s.tool_name === event.tool_name)) {
+              accumulatedSources.push({
+                tool_name: event.tool_name,
+                type: classifyTool(event.tool_name),
+              });
               setMessages(prev =>
                 prev.map(m =>
                   m.id === assistantId
-                    ? { ...m, content: accumulatedContent, isStreaming: true }
+                    ? { ...m, sources: [...accumulatedSources], isStreaming: true }
                     : m
                 )
               );

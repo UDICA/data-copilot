@@ -28,11 +28,11 @@ export function ConnectionForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+      <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
         Add Connection
       </h3>
       <div>
-        <label htmlFor="source-name" className="block text-xs font-medium text-gray-600 mb-1">
+        <label htmlFor="source-name" className="block text-xs font-medium text-gray-400 mb-1">
           Name
         </label>
         <input
@@ -41,11 +41,11 @@ export function ConnectionForm() {
           value={name}
           onChange={e => setName(e.target.value)}
           placeholder="My Database"
-          className="w-full rounded-md border border-gray-300 px-2.5 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="w-full rounded-md border border-gray-700 bg-gray-800 px-2.5 py-1.5 text-sm text-gray-100 placeholder-gray-500 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
         />
       </div>
       <div>
-        <label htmlFor="connection-string" className="block text-xs font-medium text-gray-600 mb-1">
+        <label htmlFor="connection-string" className="block text-xs font-medium text-gray-400 mb-1">
           Connection String
         </label>
         <input
@@ -54,18 +54,18 @@ export function ConnectionForm() {
           value={connectionString}
           onChange={e => setConnectionString(e.target.value)}
           placeholder="postgresql://user:pass@host/db"
-          className="w-full rounded-md border border-gray-300 px-2.5 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="w-full rounded-md border border-gray-700 bg-gray-800 px-2.5 py-1.5 text-sm text-gray-100 placeholder-gray-500 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 focus:outline-none"
         />
       </div>
       <button
         type="submit"
         disabled={!name.trim() || !connectionString.trim()}
-        className="w-full rounded-md bg-gray-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+        className="w-full rounded-md bg-purple-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-purple-500 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none disabled:bg-gray-700 disabled:cursor-not-allowed transition-colors"
       >
         Connect
       </button>
       {submitted && (
-        <p className="text-xs text-green-600 text-center">
+        <p className="text-xs text-emerald-400 text-center">
           Connection request submitted
         </p>
       )}

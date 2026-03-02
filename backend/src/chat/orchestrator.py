@@ -44,9 +44,15 @@ class ChatOrchestrator:
     text response.
     """
 
-    def __init__(self, settings: Settings, registry: ToolRegistry) -> None:
+    def __init__(
+        self,
+        settings: Settings,
+        registry: ToolRegistry,
+        system_prompt: str = "",
+    ) -> None:
         self._settings = settings
         self._registry = registry
+        self._system_prompt = system_prompt
         self._client = httpx.AsyncClient(
             base_url=settings.openrouter_base_url,
             headers={
@@ -78,8 +84,11 @@ class ChatOrchestrator:
         tools = self._registry.to_openai_tools()
         sources: list[str] = []
 
-        # Build working copy of messages for the tool loop
-        working_messages = list(messages)
+        # Build working copy of messages for the tool loop, prepend system prompt
+        working_messages: list[dict[str, Any]] = []
+        if self._system_prompt:
+            working_messages.append({"role": "system", "content": self._system_prompt})
+        working_messages.extend(messages)
 
         for iteration in range(MAX_TOOL_ITERATIONS):
             try:

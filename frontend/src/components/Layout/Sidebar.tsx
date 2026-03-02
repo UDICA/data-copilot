@@ -13,9 +13,9 @@ interface SidebarProps {
  */
 export function Sidebar({ sources, loading, onRefresh }: SidebarProps) {
   return (
-    <aside className="w-64 bg-gray-50 border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto">
-      <div className="p-4 border-b border-gray-200">
-        <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+    <aside className="w-64 bg-gray-900 border-r border-gray-800 flex flex-col shrink-0 overflow-y-auto">
+      <div className="p-4 border-b border-gray-800">
+        <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-wide">
           Data Sources
         </h2>
       </div>
@@ -24,7 +24,7 @@ export function Sidebar({ sources, loading, onRefresh }: SidebarProps) {
         <SourcePanel sources={sources} loading={loading} onRefresh={onRefresh} />
       </div>
 
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-4 border-t border-gray-800">
         <ConnectionForm />
       </div>
     </aside>

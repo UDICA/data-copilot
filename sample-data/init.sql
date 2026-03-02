@@ -249,33 +249,37 @@ FROM generate_series(1, 5000) AS s;
 -- Each order gets 1-5 line items. Higher-value products appear less frequently.
 -- =============================================================================
 
+-- Step 1: Collect active product IDs for random selection
+CREATE TEMPORARY TABLE _active_products AS
+SELECT id, price, category, ROW_NUMBER() OVER (ORDER BY id) - 1 AS idx
+FROM products WHERE status = 'active';
+
+-- Step 2: Insert order items using modular arithmetic + per-row randomness
+-- This avoids the CROSS JOIN LATERAL random() optimization bug in PostgreSQL.
 INSERT INTO order_items (order_id, product_id, quantity, unit_price)
 SELECT
-    o.id AS order_id,
-    p.id AS product_id,
-    -- Quantity: accessories/software 1-10, hardware/services usually 1-2
+    sub.order_id,
+    ap.id AS product_id,
     CASE
-        WHEN p.category IN ('Accessories','Software') THEN 1 + (random() * 9)::INT
-        WHEN p.category = 'Electronics' THEN 1 + (random() * 3)::INT
+        WHEN ap.category IN ('Accessories','Software') THEN 1 + (random() * 9)::INT
+        WHEN ap.category = 'Electronics' THEN 1 + (random() * 3)::INT
         ELSE 1 + (random() * 1)::INT
     END AS quantity,
-    p.price AS unit_price
+    ap.price AS unit_price
 FROM (
-    -- For each order, pick a random number of distinct products (1-5 line items)
     SELECT
-        o.id,
-        -- Generate 1-5 item slots per order
+        o.id AS order_id,
         generate_series(1, 1 + (random() * LEAST(4, (o.id % 5)))::INT) AS item_slot
     FROM orders o
-) o
-CROSS JOIN LATERAL (
-    -- Pick a random product, weighted toward active products
-    SELECT id, price, category
-    FROM products
-    WHERE status = 'active'
-    ORDER BY random()
-    LIMIT 1
-) p;
+) sub
+JOIN _active_products ap ON ap.idx = (
+    -- Deterministic-ish but well-distributed product selection per row
+    (hashtext(sub.order_id::TEXT || '-' || sub.item_slot::TEXT) % (SELECT COUNT(*) FROM _active_products)::INT
+     + (SELECT COUNT(*) FROM _active_products)::INT)
+    % (SELECT COUNT(*) FROM _active_products)::INT
+);
+
+DROP TABLE _active_products;
 
 -- =============================================================================
 -- Recalculate order totals from actual line items

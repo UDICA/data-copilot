@@ -20,7 +20,7 @@ services:
     build: ./backend
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
-      - OPENROUTER_MODEL=${OPENROUTER_MODEL:-openai/gpt-4o-mini}
+      - OPENROUTER_MODEL=${OPENROUTER_MODEL:-anthropic/claude-haiku-4.5}
       - DATABASE_URL=postgresql+asyncpg://datacopilot:datacopilot@db:5432/datacopilot
       - DB_READ_ONLY=true
       - ALLOWED_FILE_PATHS=["/app/sample-data"]

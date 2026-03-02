@@ -61,14 +61,14 @@ export function DataTable({ rows, maxRows = 100 }: DataTableProps) {
   const displayRows = sortedRows.slice(0, maxRows);
 
   if (rows.length === 0) {
-    return <p className="text-sm text-gray-500 italic">No data to display.</p>;
+    return <p className="text-sm text-gray-400 italic">No data to display.</p>;
   }
 
   return (
-    <div className="overflow-x-auto border border-gray-200 rounded-lg">
+    <div className="overflow-x-auto border border-gray-700 rounded-lg">
       <table className="min-w-full text-sm">
         <thead>
-          <tr className="bg-gray-50 border-b border-gray-200">
+          <tr className="bg-gray-800 border-b border-gray-700">
             {columns.map(col => {
               const isActive = sort.column === col;
               let indicator = '';
@@ -78,7 +78,7 @@ export function DataTable({ rows, maxRows = 100 }: DataTableProps) {
               return (
                 <th
                   key={col}
-                  className="px-3 py-2 text-left font-medium text-gray-700 cursor-pointer select-none hover:bg-gray-100 transition-colors"
+                  className="px-3 py-2 text-left font-medium text-gray-300 cursor-pointer select-none hover:bg-gray-700 transition-colors"
                   onClick={() => handleSort(col)}
                   onKeyDown={e => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -106,10 +106,10 @@ export function DataTable({ rows, maxRows = 100 }: DataTableProps) {
           {displayRows.map((row, idx) => (
             <tr
               key={idx}
-              className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+              className={idx % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800/50'}
             >
               {columns.map(col => (
-                <td key={col} className="px-3 py-2 text-gray-900 border-t border-gray-100">
+                <td key={col} className="px-3 py-2 text-gray-200 border-t border-gray-800">
                   {row[col] == null ? '' : String(row[col])}
                 </td>
               ))}
@@ -118,7 +118,7 @@ export function DataTable({ rows, maxRows = 100 }: DataTableProps) {
         </tbody>
       </table>
       {rows.length > maxRows && (
-        <p className="text-xs text-gray-400 px-3 py-2 bg-gray-50 border-t border-gray-200">
+        <p className="text-xs text-gray-500 px-3 py-2 bg-gray-800 border-t border-gray-700">
           Showing {maxRows} of {rows.length} rows
         </p>
       )}
